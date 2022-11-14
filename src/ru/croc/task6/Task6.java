@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 public class Task6 {
 
     public static void main(String[] args) {
+        //пример строки кода
         String source = """
                          /*
                          * My first ever program in Java!
@@ -18,21 +19,39 @@ public class Task6 {
                                 System.out.println("Hi!"); // :)
                             }
                          } // the end
-                           // to be continued...
-                """;
+                           // to be continued...""";
         String noComments = removeJavaComments(source);
         System.out.println(noComments);
     }
 
     public static String removeJavaComments(String source) {
-        Pattern doubleSlash = Pattern.compile("^//.$");
-        Matcher matcher = doubleSlash.matcher(source);
-        StringBuilder str = new StringBuilder();
-        while(matcher.find()){
-            str.append(source, matcher.start(), matcher.end());
-        }
-
-        return str.toString();
+        source = removeDoubleSlash(source);
+        return removeMultiline(source);
     }
 
+    private static String removeDoubleSlash(String source){
+        StringBuilder stb = new StringBuilder();
+        Pattern doubleSlash = Pattern.compile("/{2}.+");
+        Matcher matcher = doubleSlash.matcher(source);
+
+        while(matcher.find()){
+            matcher.appendReplacement(stb, "");
+        }
+
+        return stb.toString();
+    }
+
+
+    private static String removeMultiline(String source){
+        StringBuilder strb = new StringBuilder();
+        //должен выводить правильно, но не выводит
+        Pattern multiline = Pattern.compile("(/\\*).+?(\\*/)");
+        Matcher matcher = multiline.matcher(source);
+
+        while(matcher.find()){
+            matcher.appendReplacement(strb, "");
+        }
+
+        return strb.toString();
+    }
 }
