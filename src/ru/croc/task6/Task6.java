@@ -37,7 +37,7 @@ public class Task6 {
         while(matcher.find()){
             matcher.appendReplacement(stb, "");
         }
-
+        matcher.appendTail(stb);
         return stb.toString();
     }
 
@@ -50,7 +50,7 @@ public class Task6 {
         while(matcher.find()){
             matcher.appendReplacement(strb, "");
         }
-
+        matcher.appendTail(strb);
         return strb.toString();
     }
 }
