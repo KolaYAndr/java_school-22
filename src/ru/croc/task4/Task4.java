@@ -1,8 +1,8 @@
-package src.ru.croc.task4;
+package ru.croc.task4;
 
-import src.ru.croc.task4.classpackage.Annotation;
-import src.ru.croc.task4.classpackage.Circle;
-import src.ru.croc.task4.classpackage.Rectangle;
+import ru.croc.task4.classpackage.Annotation;
+import ru.croc.task4.classpackage.Circle;
+import ru.croc.task4.classpackage.Rectangle;
 
 public class Task4 {
 

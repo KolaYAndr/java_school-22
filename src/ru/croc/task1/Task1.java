@@ -1,4 +1,4 @@
-package src.ru.croc.task1;
+package ru.croc.task1;
 
 public class Task1 {
     public static void main(String[] args) {

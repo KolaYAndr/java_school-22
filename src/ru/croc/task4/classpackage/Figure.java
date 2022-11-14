@@ -1,4 +1,4 @@
-package src.ru.croc.task4.classpackage;
+package ru.croc.task4.classpackage;
 
 public abstract class Figure {
     //поля, которые потом определим в классах-наследниках

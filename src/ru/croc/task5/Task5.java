@@ -1,8 +1,8 @@
-package src.ru.croc.task5;
+package ru.croc.task5;
 
-import src.ru.croc.task5.classpackage.Annotation;
-import src.ru.croc.task5.classpackage.Circle;
-import src.ru.croc.task5.classpackage.Rectangle;
+import ru.croc.task5.classpackage.Annotation;
+import ru.croc.task5.classpackage.Circle;
+import ru.croc.task5.classpackage.Rectangle;
 
 public class Task5 {
     public static void main(String[] args) {

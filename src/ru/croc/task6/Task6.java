@@ -1,4 +1,4 @@
-package src.ru.croc.task6;
+package ru.croc.task6;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,8 +44,7 @@ public class Task6 {
 
     private static String removeMultiline(String source){
         StringBuilder strb = new StringBuilder();
-        //должен выводить правильно, если верить RegExp, но не выводит
-        Pattern multiline = Pattern.compile("(/\\*).*?(\\*/)");
+        Pattern multiline = Pattern.compile("(/\\*).+?(\\*/)", Pattern.DOTALL);
         Matcher matcher = multiline.matcher(source);
 
         while(matcher.find()){

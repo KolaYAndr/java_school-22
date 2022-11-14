@@ -1,4 +1,4 @@
-package src.ru.croc.task4.classpackage;
+package ru.croc.task4.classpackage;
 
 public class Circle extends Figure {
     private double r;
