@@ -44,8 +44,8 @@ public class Task6 {
 
     private static String removeMultiline(String source){
         StringBuilder strb = new StringBuilder();
-        //должен выводить правильно, но не выводит
-        Pattern multiline = Pattern.compile("(/\\*).+?(\\*/)");
+        //должен выводить правильно, если верить RegExp, но не выводит
+        Pattern multiline = Pattern.compile("(/\\*).*?(\\*/)");
         Matcher matcher = multiline.matcher(source);
 
         while(matcher.find()){
