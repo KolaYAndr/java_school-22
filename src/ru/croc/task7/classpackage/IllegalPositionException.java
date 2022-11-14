@@ -1,24 +1,17 @@
 package ru.croc.task7.classpackage;
 
 public class IllegalPositionException extends Exception{
-    private final double x;
-    private final double y;
+    private final int x;
+    private final int y;
 
-    public IllegalPositionException(double x, double y){
+    public IllegalPositionException(int x, int y){
         this.x = x;
         this.y = y;
     }
 
     @Override
     public String getMessage() {
-        return "Position must be from 0 to 7 for both directions";
+        return "Illegal position: " + (y) + (x + 1);
     }
 
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
 }

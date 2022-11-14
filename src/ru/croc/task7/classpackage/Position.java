@@ -5,7 +5,7 @@ import java.util.List;
 public class Position {
     private int x;
     private int y;
-    private static final List<Character> list = List.of('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h');
+    public static final List<Character> list = List.of('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h');
 
 
     public Position(int x, int y) {
@@ -15,11 +15,10 @@ public class Position {
         catch (IllegalPositionException e){
             System.out.println(e.getMessage());
         }
-        finally {
-            this.x = 0;
-            this.y = 0;
-        }
     }
+
+    //сделать конструктор из строки
+
 
     private void checkIfPositionOkThenSet(int x, int y) throws IllegalPositionException {
         if (x <= 7 & y <= 7) {
@@ -27,6 +26,7 @@ public class Position {
             this.y = y;
         } else throw new IllegalPositionException(x, y);
     }
+
 
     @Override
     public String toString() {
