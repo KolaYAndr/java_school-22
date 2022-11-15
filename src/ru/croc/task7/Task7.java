@@ -8,16 +8,18 @@ import java.util.List;
 public class Task7 {
 
     public static void main(String[] args) {
-        Position pos0 = new Position(5, 6);
+        Position pos0 = new Position("g8");
         Position pos1 = new Position(5, 7);
-        Position pos2 = new Position(5, 6);
-        List<Position> poses = List.of(pos0, pos1, pos2);
-        try {
-            moveByKnight(poses);
-        }
-        catch (IllegalMoveException e){
-            System.out.println(e.getMessage());
-        }
+        System.out.println(pos1);
+//
+//        Position pos2 = new Position(5, 6);
+//        List<Position> poses = List.of(pos0, pos1, pos2);
+//        try {
+//            moveByKnight(poses);
+//        }
+//        catch (IllegalMoveException e){
+//            System.out.println(e.getMessage());
+//        }
     }
 
     public static void moveByKnight(List<Position> positions) throws IllegalMoveException {

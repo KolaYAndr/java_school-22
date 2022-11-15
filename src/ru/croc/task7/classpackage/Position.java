@@ -24,7 +24,7 @@ public class Position {
 
 
     private void checkIfPositionIsOkThenSet(int x, int y) throws IllegalPositionException {
-        if (x <= 7 & y <= 7) {
+        if (x <= 7 & y <= 7 & x >= 0 & y >= 0) {
             this.x = x;
             this.y = y;
         } else throw new IllegalPositionException(x, y);
@@ -41,7 +41,7 @@ public class Position {
 
     @Override
     public String toString() {
-        return list.get(y).toString() + (x + 1);
+        return list.get(x).toString() + (y + 1);
     }
 
 }
