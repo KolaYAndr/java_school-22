@@ -10,17 +10,20 @@ public class Position {
 
     public Position(int x, int y) {
         try {
-            checkIfPositionOkThenSet(x, y);
-        }
-        catch (IllegalPositionException e){
+            checkIfPositionIsOkThenSet(x, y);
+        } catch (IllegalPositionException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    //сделать конструктор из строки
+    public Position(String pos) {
+        int y = list.indexOf(pos.charAt(0));
+        int x = pos.charAt(1);
+        new Position(x - '0' - 1, y);
+    }
 
 
-    private void checkIfPositionOkThenSet(int x, int y) throws IllegalPositionException {
+    private void checkIfPositionIsOkThenSet(int x, int y) throws IllegalPositionException {
         if (x <= 7 & y <= 7) {
             this.x = x;
             this.y = y;
@@ -28,8 +31,17 @@ public class Position {
     }
 
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
     @Override
     public String toString() {
         return list.get(y).toString() + (x + 1);
     }
+
 }
