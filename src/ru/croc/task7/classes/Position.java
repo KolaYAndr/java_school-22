@@ -1,4 +1,4 @@
-package ru.croc.task7.classpackage;
+package ru.croc.task7.classes;
 
 import java.util.List;
 
@@ -21,8 +21,10 @@ public class Position {
         int digit = pos.charAt(1) - '0' - 1;
         try {
             checkThenSet(letter, digit);
+            System.out.println(this);
         } catch (IllegalPositionException e) {
             System.out.println(e.getMessage());
+
         }
     }
 

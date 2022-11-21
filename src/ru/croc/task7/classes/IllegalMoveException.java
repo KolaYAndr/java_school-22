@@ -1,4 +1,4 @@
-package ru.croc.task7.classpackage;
+package ru.croc.task7.classes;
 
 public class IllegalMoveException extends Exception {
     public final Position from;
