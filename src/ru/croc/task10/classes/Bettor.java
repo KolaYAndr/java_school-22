@@ -1,7 +1,6 @@
 package ru.croc.task10.classes;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 public class Bettor extends Thread {
     private final Lot lot;

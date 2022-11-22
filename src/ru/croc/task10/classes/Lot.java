@@ -2,7 +2,6 @@ package ru.croc.task10.classes;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Objects;
 
 public class Lot {
     private double currentPrice;
@@ -32,10 +31,6 @@ public class Lot {
     public String getBuyerName() {
         if (LocalDateTime.now().isAfter(endingTime)) return customerName + ": " + currentPrice;
         else return "The buyer is not determined yet";
-    }
-
-    public String getCustomerName() {
-        return customerName;
     }
 
     public LocalDateTime getEndingTime() {
