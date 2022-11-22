@@ -1,6 +1,7 @@
 package ru.croc.task7;
 
 import ru.croc.task7.classes.IllegalMoveException;
+import ru.croc.task7.classes.IllegalPositionException;
 import ru.croc.task7.classes.Position;
 
 import java.util.List;
@@ -8,11 +9,17 @@ import java.util.List;
 public class Task7 {
 
     public static void main(String[] args) {
-        Position pos0 = new Position("c6");
-        Position pos1 = new Position("b4");
-        Position pos2 = new Position("c2");
-        Position pos3 = new Position("k7");
-        //System.out.println(moveByKnight(pos0, pos1, pos2, pos3));
+        try {
+            Position pos0 = new Position("c6");
+            Position pos1 = new Position("b4");
+            Position pos2 = new Position("c2");
+            Position pos3 = new Position("k7");
+
+            System.out.println(moveByKnight(pos0, pos1, pos2, pos3));
+        } catch (IllegalPositionException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     private static void move(List<Position> positions) throws IllegalMoveException {
@@ -29,13 +36,12 @@ public class Task7 {
         }
     }
 
-    public static String moveByKnight(Position... positions){
+    public static String moveByKnight(Position... positions) {
         List<Position> poses = List.of(positions);
         try {
             move(poses);
             return "Приемлемо";
-        }
-        catch (IllegalMoveException e){
+        } catch (IllegalMoveException e) {
             return e.getMessage();
         }
     }

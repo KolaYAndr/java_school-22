@@ -8,25 +8,16 @@ public class Position {
     public static final List<Character> letters = List.of('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h');
 
 
-    public Position(int letter, int digit) {
-        try {
+    public Position(int letter, int digit) throws IllegalPositionException{
             checkThenSet(letter, digit);
-        } catch (IllegalPositionException e) {
-            System.out.println(e.getMessage());
-        }
     }
 
-    public Position(String pos) {
+    public Position(String pos) throws IllegalPositionException{
         int letter = letters.indexOf(pos.charAt(0));
         int digit = pos.charAt(1) - '0' - 1;
-        try {
-            checkThenSet(letter, digit);
-            System.out.println(this);
-        } catch (IllegalPositionException e) {
-            System.out.println(e.getMessage());
 
+        checkThenSet(letter, digit);
         }
-    }
 
     private void checkThenSet(int letter, int digit) throws IllegalPositionException {
         if (letter >= 0 & letter <= 7 & digit >= 0 & digit <= 7) {
