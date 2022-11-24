@@ -5,8 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class Runner implements Runnable {
     private static final char[] HEX_DIGITS = "0123456789ABCDEF".toCharArray();
-    //private static final String hashCode = "40682260CC011947FC2D0B1A927138C5";
-    private static final String hashCode = "47a81cd0033c74090c4232ac0c2a123a";
+    private static final String hashCode = "40682260CC011947FC2D0B1A927138C5";
     private String password;
     private char[] charPassword;
 
