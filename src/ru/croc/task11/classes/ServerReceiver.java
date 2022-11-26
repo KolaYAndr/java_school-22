@@ -1,4 +1,4 @@
-package task11.classes;
+package ru.croc.task11.classes;
 
 import java.io.*;
 import java.net.Socket;

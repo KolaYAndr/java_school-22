@@ -1,6 +1,7 @@
 package ru.croc.task10.classes;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Bettor extends Thread {
     private final Lot lot;
@@ -14,11 +15,10 @@ public class Bettor extends Thread {
     @Override
     public void run() {
         while (LocalDateTime.now().isBefore(lot.getEndingTime())) {
-            synchronized (lot) {
+            if (!Objects.equals(lot.getBuyerName(), this.name)) {
                 makeBet();
             }
         }
-        System.out.println(lot.getBuyerName());
         this.interrupt();
     }
 

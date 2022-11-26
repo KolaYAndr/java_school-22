@@ -6,12 +6,14 @@ import java.time.temporal.ChronoUnit;
 public class Lot {
     private double currentPrice;
     private String customerName;
-    private final LocalDateTime endingTime;
+    protected final LocalDateTime endingTime;
 
     //конструктор
     public Lot(double startingPrice, LocalDateTime time) {
         this.currentPrice = startingPrice;
         this.endingTime = time;
+        Watcher watcher = new Watcher();
+        watcher.start();
     }
 
     //второй конструктор, задающий стартовую цену и время окончания через константу времени
@@ -20,7 +22,7 @@ public class Lot {
     }
 
     //метод принятия ставки с проверкой
-    public void bet(double offeredPrice, String name) {
+    public synchronized void bet(double offeredPrice, String name) {
         if (offeredPrice > currentPrice) {
             this.currentPrice = offeredPrice;
             this.customerName = name;
@@ -29,7 +31,7 @@ public class Lot {
     }
 
     public String getBuyerName() {
-        if (LocalDateTime.now().isAfter(endingTime)) return customerName + ": " + currentPrice;
+        if (LocalDateTime.now().isAfter(endingTime)) return customerName + " wins: " + currentPrice;
         else return "The buyer is not determined yet";
     }
 
@@ -39,5 +41,15 @@ public class Lot {
 
     public double getCurrentPrice() {
         return currentPrice;
+    }
+
+    private class Watcher extends Thread {
+        @Override
+        public void run() {
+            while (LocalDateTime.now().isBefore(endingTime)) {
+            }
+            System.out.println(getBuyerName());
+            this.interrupt();
+        }
     }
 }
