@@ -8,7 +8,7 @@ public class Runner implements Runnable {
     private static volatile boolean found = false;
     private static final char[] HEX_DIGITS = "0123456789ABCDEF".toCharArray();
     //private static final String hashCode = "40682260CC011947FC2D0B1A927138C5"; //начальный хэш
-    private static final String hashCode = "7f0a8265f16d8141ea97020e218219a4".toUpperCase(); //msv хэш сгенерировал через сайт https://emn178.github.io/online-tools/md5.html
+    private static final String hashCode = "7f0a8265f16d8141ea97020e218219a4".toUpperCase(); // == msv хэш сгенерировал через сайт https://emn178.github.io/online-tools/md5.html
     private String password;
     private char[] charPassword;
 
