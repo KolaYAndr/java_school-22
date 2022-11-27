@@ -2,15 +2,16 @@ package ru.croc.task9.classes;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 public class Runner implements Runnable {
+    private static volatile boolean found = false;
     private static final char[] HEX_DIGITS = "0123456789ABCDEF".toCharArray();
-    private static final String hashCode = "40682260CC011947FC2D0B1A927138C5";
-    private String password;
+    //private static final String hashCode = "40682260CC011947FC2D0B1A927138C5";
+    private static final String hashCode = "47a81cd0033c74090c4232ac0c2a123a".toUpperCase();
     private char[] charPassword;
 
     public Runner(String str) {
-        this.password = str;
         this.charPassword = str.toCharArray();
     }
 
@@ -41,24 +42,33 @@ public class Runner implements Runnable {
     }
 
     private String searching() {
-        char[] startCharedPassword = charPassword.clone();
-
-        for (int i = charPassword.length - 1; i >= 0; i--) {
-
-            char j = (char) (charPassword[i] + 1);
-            while (j != startCharedPassword[i]) {
-                password = charPassword.toString();
-
-                //проверяем совпадение
-                if ((hashPassword(password).equals(hashCode.toUpperCase()))) {
-                    return password; // выход из цикла
-                }
-
-                charPassword[i] = j;
-                if (j == 122) j = 96;
-                j++;
+        int[] passwordInt = new int[charPassword.length];
+        for (int i = 0; i < charPassword.length; i++) {
+            passwordInt[i] = charPassword[i];
         }
-    }
+
+        int last = passwordInt.length - 1;
+
+        //цикл смены пароля
+        while (passwordInt[0] != 122) {
+
+            if ((hashPassword(Arrays.toString(charPassword)).equals(hashCode))) {
+                found = true;
+                return Arrays.toString(charPassword);// выход из цикла
+            }
+
+            for (int i = last; i > 0; i--) {
+                if (passwordInt[i] == 122) {
+                    passwordInt[i] = 97;
+                    passwordInt[i - 1]++;
+                }
+                if (passwordInt[0] == 122) passwordInt[0] = 97;
+                charPassword[i] = (char) passwordInt[i];
+            }
+            System.out.println(charPassword);
+            passwordInt[last]++;
+        }
         return null;
     }
+
 }
