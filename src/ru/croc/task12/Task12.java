@@ -17,7 +17,7 @@ public class Task12 {
 
         TextWatcher tw = new TextWatcher();
 
-        tw.filterCommentsReplacing(comments, blackList);
+        tw.filterComments(comments, blackList);
 
         for (Object comment : comments) System.out.println(comment);
     }
