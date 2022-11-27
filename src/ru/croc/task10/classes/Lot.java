@@ -23,7 +23,7 @@ public class Lot {
 
     //метод принятия ставки с проверкой
     public synchronized void bet(double offeredPrice, String name) {
-        if (offeredPrice > currentPrice) {
+        if (offeredPrice > currentPrice & LocalDateTime.now().isBefore(endingTime)) {
             this.currentPrice = offeredPrice;
             this.customerName = name;
             System.out.println(name + " offered price " + offeredPrice + ": Accepted");
