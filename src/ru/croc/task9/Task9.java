@@ -1,22 +1,22 @@
 package ru.croc.task9;
 
-import ru.croc.task9.classes.Runner;
+import ru.croc.task9.classes.ThreadManager;
+
+import java.util.Scanner;
 
 public class Task9 {
     public static void main(String[] args) {
-//        Thread t1 = new Thread(new Runner("aaaaaaa"));
-//        Thread t2 = new Thread(new Runner("fffffff"));
-//        Thread t3 = new Thread(new Runner("mmmmmmm"));
-//        Thread t4 = new Thread(new Runner("ttttttt"));
+        Scanner scanner = new Scanner(System.in);
 
-        Thread t1 = new Thread(new Runner("aaa"));
-        Thread t2 = new Thread(new Runner("fff"));
-        Thread t3 = new Thread(new Runner("mmm"));
-        Thread t4 = new Thread(new Runner("ttt"));
+        System.out.println("Какое количество потоков?");
+        int threadsAmount = scanner.nextInt();
 
-        t1.start();
-        t2.start();
-        t3.start();
-        t4.start();
+        System.out.println("Введите хэш пароля");
+        String hash = scanner.next();
+
+        System.out.println("Какой длины был пароль?");
+        int length = scanner.nextInt();
+
+        ThreadManager tm = new ThreadManager(threadsAmount, hash.toUpperCase(), length);
     }
 }

@@ -3,18 +3,21 @@ package ru.croc.task9.classes;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Runner implements Runnable {
-    private static volatile boolean found = false;
     private static final char[] HEX_DIGITS = "0123456789ABCDEF".toCharArray();
     //private static final String hashCode = "40682260CC011947FC2D0B1A927138C5"; //начальный хэш
-    private static final String hashCode = "7f0a8265f16d8141ea97020e218219a4".toUpperCase(); // == msv хэш сгенерировал через сайт https://emn178.github.io/online-tools/md5.html
+    private final String hashCode;
     private String password;
+    private String endPoint;
     private char[] charPassword;
 
-    public Runner(String str) {
-        this.password = str;
-        this.charPassword = str.toCharArray();
+    public Runner(String entryPoint, String endPoint, String hashCode) {
+        this.password = entryPoint;
+        this.charPassword = entryPoint.toCharArray();
+        this.endPoint = endPoint;
+        this.hashCode = hashCode;
     }
 
     private static String toHexString(byte[] bytes) {
@@ -54,11 +57,10 @@ public class Runner implements Runnable {
         int last = passwordInt.length - 1;
 
         //цикл смены пароля
-        while (!found) {
+        while (!Objects.equals(password, endPoint)) {
             String hash = hashPassword(password);
             boolean equals = hash.equals(hashCode);
             if (equals) {
-                found = true;
                 return password;// выход из цикла
             }
 
@@ -70,8 +72,7 @@ public class Runner implements Runnable {
                 if (passwordInt[0] > 122) passwordInt[0] = 97;
                 charPassword[i] = (char) passwordInt[i];
             }
-            password = Arrays.toString(charPassword);
-            System.out.println(charPassword);
+            password = String.copyValueOf(charPassword);
             passwordInt[last]++;
         }
         return null;
