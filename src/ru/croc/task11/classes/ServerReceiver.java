@@ -5,9 +5,9 @@ import java.net.Socket;
 import java.util.Objects;
 
 public class ServerReceiver extends Thread {
-    private Socket socket;
-    private BufferedReader reader;
-    private BufferedWriter writer;
+    private final Socket socket;
+    private final BufferedReader reader;
+    private final BufferedWriter writer;
 
     public ServerReceiver(Socket socket) throws IOException{
         this.socket = socket;
@@ -21,20 +21,19 @@ public class ServerReceiver extends Thread {
     @Override
     public void run() {
         try {
-            String phrase = reader.readLine();
             boolean flag;
             do {
+                String phrase = reader.readLine();
+
                 flag = Objects.equals(phrase.toLowerCase(), "exit");
 
-                phrase = reader.readLine();
-
-                for (ServerReceiver serverReceiver : Server.serverReceivers) {
-                    serverReceiver.update(phrase);
-                }
 
                 if (flag) {
                     finishing();
-                }
+                } else
+                    for (ServerReceiver serverReceiver : Server.serverReceivers) {
+                        serverReceiver.update(phrase);
+                    }
             } while (!flag);
         } catch (IOException e) {
             finishing();
@@ -60,7 +59,7 @@ public class ServerReceiver extends Thread {
 
     private void update(String message) {
         try {
-            writer.write(message);
+            writer.write(message + "\n");
             writer.flush();
         } catch (IOException e) {
             System.out.println(e.getMessage());
