@@ -2,116 +2,68 @@ package ru.croc.task11.classes;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Objects;
 
-public class Client {
+public class Client extends Thread {
+    private Socket clientSocket;
+    private BufferedReader bufferedReader;
+    private DataOutputStream dataOutputStream;
+    private DataInputStream dataInputStream;
 
     public Client(String ip, int port) {
-        try {
-            Socket socket = new Socket(ip, port);
+        try (Socket socket = new Socket(ip, port)) {
+            this.clientSocket = socket;
+            this.bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+            this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            this.dataInputStream = new DataInputStream(socket.getInputStream());
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            System.out.println("Введите имя пользователя: ");
-            String name = br.readLine();
-
-            ClientRead cr = new ClientRead(socket);
-            ClientWrite cw = new ClientWrite(name, socket);
-            cr.start();
-            cw.start();
+            start();
         } catch (IOException e) {
-            System.err.println("Socket failed");
+            e.printStackTrace();
         }
     }
 
-    private static class ClientRead extends Thread {
-        private final Socket socket;
-        private BufferedReader bufferedReader;
+    @Override
+    public void run() {
+        try {
+            dataOutputStream.writeUTF("Input your name");
+            dataOutputStream.flush();
+            String name = dataInputStream.readUTF();
 
-        public ClientRead(Socket socket) {
-            this.socket = socket;
+            boolean flag;
+            do {
+                //пользователь вводит фразу
+                String phrase = bufferedReader.readLine();
+
+                //проверяем фразу на совпадение с exit
+                flag = phrase.equalsIgnoreCase("exit");
+                //если совпало, заканчиваем подключение и выводим сообщение о выходе пользователья
+                if (flag) {
+                    dataOutputStream.writeUTF("User " + name + " left the channel");
+                    dataOutputStream.flush();
+                    finishing();
+                } else {
+                    dataOutputStream.writeUTF(name + ": " + phrase);
+                    dataOutputStream.flush();
+                }
+            } while (!flag);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        @Override
-        public void run() {
-            try {
-                bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-                boolean flag;
-                do {
-                    String phrase = bufferedReader.readLine();
-
-                    flag = Objects.equals(phrase.toLowerCase(), "exit");
-
-                    if (flag) {
-                        finishing();
-                    }
-                } while (!flag);
-            } catch (IOException e) {
-                System.out.println("Не получилось взять данные с сокета");
-            }
-        }
-
-        private void finishing() {
-            try {
-                bufferedReader.close();
-                socket.close();
-            }
-            catch (IOException e){
-                System.out.println(e.getMessage());
-            }
-        }
     }
 
-    private static class ClientWrite extends Thread{
-        private final Socket socket;
-        private final String name;
-        private BufferedWriter bufferedWriter;
-        private BufferedReader bufferedReader;
 
-        public ClientWrite(String name, Socket socket){
-            this.socket = socket;
-            this.name = name;
-        }
-
-        @Override
-        public void run() {
-            try {
-                bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-                bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-
-                boolean flag;
-                do {
-                    String phrase = bufferedReader.readLine();
-
-                    flag = Objects.equals(phrase.toLowerCase(), "exit");
-
-                    if (flag) {
-                        finishing();
-                    } else update(name + ": " +phrase);
-                } while (!flag);
-            } catch (IOException e) {
-                System.out.println("Не получилось взять данные с сокета");
-            }
-        }
-
-        private void finishing() {
-            try {
+    //закрываем всё, что может быть закрыто
+    private void finishing() {
+        try {
+            if (!clientSocket.isClosed()) {
+                dataOutputStream.close();
+                dataInputStream.close();
                 bufferedReader.close();
-                bufferedWriter.close();
-                socket.close();
+                clientSocket.close();
             }
-            catch (IOException e){
-                System.out.println(e.getMessage());
-            }
-        }
-
-        private void update(String message){
-            try {
-                bufferedWriter.write(message + "\n");
-                bufferedWriter.flush();
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
+        } catch (IOException e){
+            e.printStackTrace();
         }
     }
 }
