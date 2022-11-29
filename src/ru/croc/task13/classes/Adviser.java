@@ -5,10 +5,9 @@ import java.util.*;
 
 public class Adviser {
     private ArrayList<User> users = new ArrayList<>();
-    private HashMap<TreeSet<String>, Double> usersFilmsWithWeight = new HashMap<>();
+    private HashMap<String, Double> recommendationMap = new HashMap<>();
 
     public Adviser(String filmsPath, String watchedPath) throws FileNotFoundException{
-        File films = new File(filmsPath);
 
         //считываем из файла просмотренные фильмы всех пользователей
         initUsers(watchedPath);
@@ -19,7 +18,9 @@ public class Adviser {
         User newUser = new User(scanner.next());
 
         //инициализируем мапу, в которой лежат пары: просмотренные фильмы + вес для рекомендации
-        createMapWithUsersFilmsAndWeights(newUser.getWatchedFilms());
+        createRecommendationMap(newUser.getWatchedFilms());
+
+        getRecommendation(filmsPath);
     }
 
     private void initUsers(String watchedPath) throws FileNotFoundException{
@@ -40,13 +41,24 @@ public class Adviser {
         }
     }
 
-    private void createMapWithUsersFilmsAndWeights(TreeSet<String> newUserWatchedFilms){
+    private void createRecommendationMap(TreeSet<String> newUserWatchedFilms){
         for (User user: users) {
-            usersFilmsWithWeight.put(user.getWatchedFilms(), user.getWeight(newUserWatchedFilms));
+            Double recommendation = user.getWeight(newUserWatchedFilms);
+            TreeSet<String> films = user.getWatchedFilms();
+
+            for(String film : films){
+                Double newRecommendation = recommendationMap.get(film) + recommendation;
+                recommendationMap.put(film, newRecommendation);
+            }
         }
     }
 
-    private void getRecommendation(){
-
+    private String getRecommendation(String filmsPath) throws FileNotFoundException{
+        File films = new File(filmsPath);
+        FileReader fileReaderFilms = new FileReader(films);
+        BufferedReader bufferedReader = new BufferedReader(fileReaderFilms);
+        //найти максимальное значение в мапе
+        //пробежаться по мапе и смотреть на совпадение строки считанной в br и ключа мапы с максимальным значением
+        //вернуть строку с названием фильма
     }
 }

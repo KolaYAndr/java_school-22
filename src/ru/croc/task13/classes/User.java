@@ -26,7 +26,8 @@ public class User {
             if (watchedFilms.contains(filmId)) counter++;
         }
 
-        return (double) counter / originUserSize;
+        if ((double) counter / originUserSize < 0.5) return 0.0;
+        else return (double) counter / originUserSize;
     }
 
 
