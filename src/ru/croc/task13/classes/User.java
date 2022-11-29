@@ -4,7 +4,10 @@ import java.util.Arrays;
 import java.util.TreeSet;
 
 public class User {
-    private TreeSet watchedFilms;
+
+    //поле, в котором храним просмотренные пользователем фильмы
+    //я решил использовать TreeSet потому, что он отсортирован и исключает повторения
+    private TreeSet<String> watchedFilms;
 
     public User(String films){
         String[] dividedStrings = films.split(",");
@@ -19,10 +22,15 @@ public class User {
         if (currentUserSize < originUserSize) return 0.0;
 
         int counter = 0;
-        for (Object filmId : anotherUserWatchedFilms) {
+        for (String filmId : anotherUserWatchedFilms) {
             if (watchedFilms.contains(filmId)) counter++;
         }
 
         return (double) counter / originUserSize;
+    }
+
+
+    public TreeSet<String> getWatchedFilms() {
+        return watchedFilms;
     }
 }
