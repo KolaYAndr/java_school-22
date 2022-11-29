@@ -1,23 +1,25 @@
 package ru.croc.task13.classes;
 
-import java.util.Collections;
-import java.util.SortedSet;
+import java.util.Arrays;
+import java.util.TreeSet;
 
 public class User {
-    private SortedSet watchedFilms;
+    private TreeSet watchedFilms;
 
     public User(String films){
-
+        String[] dividedStrings = films.split(",");
+        watchedFilms = new TreeSet<>(Arrays.asList(dividedStrings));
     }
 
 
-    private double getWieght(SortedSet anotherUserWatchedFimls) {
+    //метод, который возвращает вес рекомендации пользователя
+    private double getWeight(TreeSet<String> anotherUserWatchedFilms) {
         int currentUserSize = watchedFilms.size();
-        int originUserSize = anotherUserWatchedFimls.size();
+        int originUserSize = anotherUserWatchedFilms.size();
         if (currentUserSize < originUserSize) return 0.0;
 
         int counter = 0;
-        for (Object filmId : anotherUserWatchedFimls) {
+        for (Object filmId : anotherUserWatchedFilms) {
             if (watchedFilms.contains(filmId)) counter++;
         }
 
