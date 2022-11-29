@@ -16,7 +16,7 @@ public class User {
 
 
     //метод, который возвращает вес рекомендации пользователя
-    private double getWeight(TreeSet<String> anotherUserWatchedFilms) {
+    double getWeight(TreeSet<String> anotherUserWatchedFilms) {
         int currentUserSize = watchedFilms.size();
         int originUserSize = anotherUserWatchedFilms.size();
         if (currentUserSize < originUserSize) return 0.0;
