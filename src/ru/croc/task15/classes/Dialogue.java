@@ -30,8 +30,7 @@ public class Dialogue {
 
     private void outputAgeGroups(){
         for (int i = ageGroups.size() - 1; i >= 0; i--) {
-            if (ageGroups.get(i) == null) continue;
-            System.out.println(ageGroups.get(i));
+            if (ageGroups.get(i).toString() != null) System.out.println(ageGroups.get(i));
         }
     }
 
