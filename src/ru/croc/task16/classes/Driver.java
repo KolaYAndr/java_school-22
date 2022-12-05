@@ -15,16 +15,8 @@ public class Driver {
 
     public boolean matchesConditions(Customer customer) {
         String customerAdditions = customer.getAdditions();
-        if (customerAdditions.equals("")) return this.comfortClass == customer.getComfortClass() & additions.equalsIgnoreCase(customerAdditions);
+        if (!customerAdditions.equals("")) return this.comfortClass == customer.getComfortClass() & additions.equalsIgnoreCase(customerAdditions);
         else return this.comfortClass == customer.getComfortClass();
-    }
-
-    public ComfortClass getComfortClass() {
-        return comfortClass;
-    }
-
-    public String getAdditions() {
-        return additions;
     }
 
     @Override

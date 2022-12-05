@@ -1,6 +1,5 @@
 package ru.croc.task16.classes;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -15,13 +14,12 @@ public class Finder {
     }
 
     public Driver getClosestFitting() {
-        Iterator<Driver> iterator = driversTreeSet.iterator();
-        while (iterator.hasNext()) {
-            if (iterator.next().matchesConditions(customer)) {
-                return iterator.next();
+        for (Driver driver : driversTreeSet) {
+            if (driver.matchesConditions(customer)) {
+                System.out.println(driver + " is the best choice!");
+                return driver;
             }
         }
-
         return null;
     }
 
