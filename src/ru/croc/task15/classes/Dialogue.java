@@ -29,8 +29,8 @@ public class Dialogue {
     }
 
     private void outputAgeGroups(){
-        for (AgeGroup ageGroup: ageGroups) {
-            System.out.println(ageGroup);
+        for (int i = ageGroups.size() - 1; i >= 0; i--) {
+            System.out.println(ageGroups.get(i));
         }
     }
 
