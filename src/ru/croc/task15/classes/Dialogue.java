@@ -22,14 +22,15 @@ public class Dialogue {
 
     private void fillAgeGroups(ArrayList<Person> persons) {
         for (AgeGroup ageGroup: ageGroups) {
-            for (Person person: persons) {
-                ageGroup.addIfFits(person);
+            for (int i = persons.size() - 1; i >= 0; i--){
+                ageGroup.addIfFits(persons.get(i));
             }
         }
     }
 
     private void outputAgeGroups(){
         for (int i = ageGroups.size() - 1; i >= 0; i--) {
+            if (ageGroups.get(i) == null) continue;
             System.out.println(ageGroups.get(i));
         }
     }
