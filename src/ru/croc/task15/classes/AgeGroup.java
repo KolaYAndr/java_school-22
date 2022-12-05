@@ -1,11 +1,12 @@
 package ru.croc.task15.classes;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class AgeGroup {
     private final int from;
     private final int to;
+
+
     private ArrayList<Person> groupMates = new ArrayList<>();
 
     public AgeGroup(int from, int to) {
@@ -21,12 +22,12 @@ public class AgeGroup {
     @Override
     public String toString() {
         if (!groupMates.isEmpty()) {
-            if (to != Integer.MAX_VALUE) return (from + 1) + " - " + to + ": " + output(groupMates);
-            else return (from + 1) + "+: " + output(groupMates);
-        } else return "";
+            if (to != Integer.MAX_VALUE) return (from + 1) + " - " + to + ": " + groupMatesOutput(groupMates);
+            else return (from + 1) + "+: " + groupMatesOutput(groupMates);
+        } else return null;
     }
 
-    private String output(ArrayList<Person> list) {
+    private String groupMatesOutput(ArrayList<Person> list) {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
             stringBuilder.append(list.get(i).toString());
