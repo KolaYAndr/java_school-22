@@ -5,10 +5,8 @@ import java.util.*;
 public class Dialogue {
     private ArrayList<AgeGroup> ageGroups = new ArrayList<>();
 
-    public void start(){
+    public void start(String[] ages){
         Scanner scanner = new Scanner(System.in);
-
-        String[] ages = getAgesLine(scanner).split(" ");
 
         ArrayList<Person> persons = getPersons(scanner);
         Collections.sort(persons);
