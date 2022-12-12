@@ -10,7 +10,8 @@ public class Coordinate {
     }
 
     public Coordinate(String coordinate){
-        this(Double.parseDouble(coordinate.split(", ")[0]), Double.parseDouble(coordinate.split(", ")[1]));
+        String[] coordinates = coordinate.split(", ");
+        new Coordinate(Double.parseDouble(coordinates[0]), Double.parseDouble(coordinates[1]));
     }
     int calculateDistanceTo(Coordinate coordinate) {
         return (int) Math.sqrt(Math.pow(this.longitude - coordinate.longitude, 2)

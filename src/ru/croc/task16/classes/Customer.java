@@ -1,11 +1,13 @@
 package ru.croc.task16.classes;
 
+import java.util.Arrays;
+
 public class Customer {
     private Coordinate coordinate;
     private ComfortClass comfortClass;
-    private String additions;
+    private String[] additions;
 
-    public Customer(Coordinate coordinate, ComfortClass comfortClass, String additions) {
+    public Customer(Coordinate coordinate, ComfortClass comfortClass, String... additions) {
         this.coordinate = coordinate;
         this.comfortClass = comfortClass;
         this.additions = additions;
@@ -19,12 +21,12 @@ public class Customer {
         return comfortClass;
     }
 
-    public String getAdditions() {
+    public String[] getAdditions() {
         return additions;
     }
 
     @Override
     public String toString() {
-        return "(" + coordinate.getLatitude() + ", " + coordinate.getLongitude() + ") " + comfortClass + " " + additions;
+        return "(" + coordinate.getLatitude() + ", " + coordinate.getLongitude() + ") " + comfortClass + " " + Arrays.toString(additions);
     }
 }
