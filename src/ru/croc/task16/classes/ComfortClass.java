@@ -1,10 +1,10 @@
 package ru.croc.task16.classes;
 
 public enum ComfortClass {
-    USUAL(0), COMFORT(1), UPPER_COMFORT(2), BUSINESS(3);
+    USUAL, COMFORT, UPPER_COMFORT, BUSINESS;
 
 
-    ComfortClass(int value) {
+    ComfortClass() {
     }
 
     public static ComfortClass getClass(int value){

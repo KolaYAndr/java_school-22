@@ -5,8 +5,8 @@ import java.util.Arrays;
 public class Driver {
     public String name;
     public final Coordinate coordinate;
-    private ComfortClass comfortClass;
-    private String[] additions;
+    private final ComfortClass comfortClass;
+    private final String[] additions;
 
     public Driver(String name, Coordinate coordinate, ComfortClass comfortClass, String... additions) {
         this.name = name;
@@ -16,10 +16,10 @@ public class Driver {
     }
 
     public boolean matchesConditions(Customer customer) {
-        String[] customerAdditions = customer.getAdditions();
+        String[] customerAdditions = customer.additions();
         if (!customerAdditions[0].equals("")) {
             //проверка на соответствие классу комфорта
-            ComfortClass customerComfortClass = customer.getComfortClass();
+            ComfortClass customerComfortClass = customer.comfortClass();
             boolean comfortMatches = customerComfortClass == comfortClass;
 
             //проверяем дополнительные требования на сочетания
@@ -32,11 +32,11 @@ public class Driver {
             }
             return comfortMatches && additionsFlag;
         }
-        else return this.comfortClass == customer.getComfortClass();
+        else return this.comfortClass == customer.comfortClass();
     }
 
     @Override
     public String toString() {
-        return name + ": (" + coordinate.getLatitude() + ", " + coordinate.getLongitude() + ") " + comfortClass + " " + Arrays.toString(additions);
+        return name;
     }
 }
