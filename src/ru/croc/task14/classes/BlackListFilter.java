@@ -3,7 +3,15 @@ package ru.croc.task14.classes;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
-public interface BlackListFilter {
+public interface BlackListFilter<T> {
 
-    ArrayList<String> filterComments(Iterable<? super String> comments, Predicate<? super String> filter);
+    default ArrayList<T> filterComments(Iterable<T> comments, Predicate<T> filter){
+        ArrayList<T> filtered = new ArrayList<>();
+
+        for (T comment: comments) {
+            if (!filter.test(comment)) filtered.add(comment);
+        }
+
+        return filtered;
+    }
 }
