@@ -45,7 +45,7 @@ public class Task17 {
                     + product_name + "','" + price + ")\n");
                     statement.execute("INSERT INTO ORDERS (ID, CUSTOMER_NAME, )");
                 } catch (SQLException e){
-                    e.getErrorCode();
+                    System.out.println(e.getErrorCode());
                 }
                 finally {
                     line = csvReader.readLine();

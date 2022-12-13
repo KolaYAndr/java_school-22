@@ -4,6 +4,19 @@ import java.util.List;
 
 public class Order {
     private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
     private String customerName;
     private List<Product> products;
 
