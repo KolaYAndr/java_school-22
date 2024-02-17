@@ -1,3 +1,2 @@
-# java_school-22
+# Обучение в Croc java
 
-# Андреев Николай [t.me/KolaYAndr](https://t.me/KolaYAndr)
